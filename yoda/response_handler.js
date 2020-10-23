@@ -20,6 +20,59 @@ let std_quotes = ["Patience you must have, my young padawan.",
 ];
 
 function respond() {
-    // Your Code Here
-    console.log("Hello World!");
+    var chat = document.getElementById("chat").value;
+    console.log(chat);
+    var picture_name = "img/";
+    var yoda_baby = true;
+    var quote = "";
+
+    // CHOOSE PICTURE
+    if (chat.includes("cute") || chat.includes("baby")) {
+        picture_name += names[0] + "-";
+        yoda_baby = true;
+    } else {
+        picture_name += names[1] + "-";
+        yoda_baby = false;
+    }
+
+    if (chat.includes("force") && chat.includes("dark")) {
+        quote = moods[0];
+        picture_name += quote + ".jpg";
+    } else if (chat.includes("force")) {
+        quote = moods[1];
+        picture_name += quote + ".jpg";
+    } else {
+        quote = moods[2];
+        picture_name += quote + ".jpg";
+    }
+
+    // CHOOSE RESPONSE
+    var yoda_response = "";
+
+    num_of_ms = Math.floor(Math.random()*50+1);
+    h = "h";
+    ms = "";
+
+    for (let i = 0; i < num_of_ms; i++) {
+        ms += "m";
+    }
+
+    quote_idx = Math.floor(Math.random()*5);
+
+    if (yoda_baby) {
+        yoda_response = "Yes, " + h + ms + ".";
+    } else if (quote == moods[0]) {
+        yoda_response = dark_quotes[quote_idx];
+        console.log("hi")
+    } else if (quote == moods[1]) {
+        yoda_response = force_quotes[quote_idx];
+    } else {
+        yoda_response = std_quotes[quote_idx]
+    }
+
+    // DISPLAY HTML
+    document.getElementById("yodaface").setAttribute("src", picture_name);
+    document.getElementById("dialogue").innerHTML = yoda_response;
+    document.getElementById("chat").value = "";
 }
+
